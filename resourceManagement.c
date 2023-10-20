@@ -173,7 +173,7 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 		//printf("\nTEST 9\n"); // works 
 
 		// while the price of the next item is wanted by the department is greater than what we have remaining in the budget, move the item to the item removed queue
-		if(!isEmpty(currentDepartment->itemsDesired)){ /////// Here is the problem.
+		if(!isEmpty(currentDepartment->itemsDesired)){ /////// Here is the problem. //////////////////////////////////////////////////////////////////////////////////////
 			queueType nextItem = getNext(currentDepartment->itemsDesired); // gets next item the department wants in its queue 
 			//printf("\nTEST 10\n"); // works 
 			if(nextItem->price > remainingBudget){ // if the next item in the departments list is more than what is left in the budget
