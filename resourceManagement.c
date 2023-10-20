@@ -265,10 +265,18 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 
     		free(item->name);
     		free(item);
-
-
-        
 		}
+
+
+
+		// Add and print scholarships if applicable
+		if (isEmpty(departments[i]->itemsDesired)) {
+    		double scholarship = minDouble(1000.0, remainingBudget); // Calculate scholarship amount
+    		//if (scholarship > 0.0) {
+        		printf("%-31s %20s\n", "Scholarship", "$" "1000.00"); // Adjust formatting
+        		remainingBudget -= scholarship; // Deduct scholarship from the budget
+    //}
+}
 		printf("\n");
 		 printf("ITEMS NOT RECEIVED\n");
         // Print items not received
@@ -282,6 +290,11 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
             free(item->name);
             free(item);
         }
+
+
+
+
+
 		printf("\n");
 		free(departments[i]->name);
         freeQueue(departments[i]->itemsDesired);
