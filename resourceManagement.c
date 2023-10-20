@@ -65,7 +65,7 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 
 		char arr[STRING_LENGTH]; // array of char named arr. reps max length of a line to read from file 
 		// read department 
-		if(fgets(arr, STRING_LENGTH, file) != NULL){ //reads line of text from the file into the arr array.
+		if(fgets(arr, STRING_LENGTH, file) != NULL){ //reads line of text from the file into the arr array. //////////////////////////////////
 			// strcspn calculates the length of the number of characters before the 1st occurrence of character present in both the string.
 			arr[strcspn(arr, "\n")] = '\0'; // removing newline characters from file
 			departments[i] -> name = (char*)malloc(strlen(arr)+1); // mallocing the array arr. remember to free use valgrid to check 
@@ -98,6 +98,13 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
         		free(item->name); // Free memory allocated for the item name
         		free(item); // Free memory allocated for the item
         		continue; // Skip adding this item to the list // continues to next line even oif there is an error or atr least that is what I am trying to do 
+
+
+
+
+
+
+			
     }
     
     enqueue(departments[i]->itemsDesired, item); // Add item to the end of the queue
