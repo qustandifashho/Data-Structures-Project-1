@@ -269,13 +269,14 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 
         
 		}
+		printf("\n");
 		 printf("ITEMS NOT RECEIVED\n");
         // Print items not received
         while (!isEmpty(departments[i]->itemsRemoved)) {
             queueType item = dequeue(departments[i]->itemsRemoved);
-			char priceString[20];
+			//char priceString[20];
 			sprintf(priceString, "$%.2lf", item->price);
-			printf("%-30s- %-30s- %20s\n", "", item->name, priceString);
+			printf("%-30s- %20s\n", item->name, priceString);;
 
             //printf("%-30s- %20s\n", item->name, priceString);
             free(item->name);
