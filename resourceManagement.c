@@ -4,6 +4,7 @@
 
 int const STRING_LENGTH = 31;
 
+
 pqType createPQType( Department *d, double totalSpent );
 double minDouble( double x, double y );
 //NOTE TO SELF:  REMEMBER TO REMOVE ALL TEST CASES BEFORE TURN IN AND ALL ELSES IF ONLY USED FOR TESTIG PURPOSES 
@@ -63,49 +64,84 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 
 
 
-		char arr[STRING_LENGTH]; // array of char named arr. reps max length of a line to read from file 
-		// read department 
-		if(fgets(arr, STRING_LENGTH, file) != NULL){ //reads line of text from the file into the arr array. //////////////////////////////////
-			// strcspn calculates the length of the number of characters before the 1st occurrence of character present in both the string.
-			arr[strcspn(arr, "\n")] = '\0'; // removing newline characters from file
-			departments[i] -> name = (char*)malloc(strlen(arr)+1); // mallocing the array arr. remember to free use valgrid to check 
-			strcpy(departments[i]-> name, arr); //copies the department name from arr array
-		}
-		else{
-			printf("Department missing\n"); // remove before turn in. 
-			exit(-1); // exit only if department mssing
-		}
-		//printf("\nTest case 3\n"); // working 
+		 char arr[STRING_LENGTH]; // array of char named arr. reps max length of a line to read from file 
+		// // read department 
+		// if(fgets(arr, STRING_LENGTH, file) != NULL){ //reads line of text from the file into the arr array. //////////////////////////////////
+		// 	// strcspn calculates the length of the number of characters before the 1st occurrence of character present in both the string.
+		// 	arr[strcspn(arr, "\n")] = '\0'; // removing newline characters from file
+		// 	departments[i] -> name = (char*)malloc(strlen(arr)+1); // mallocing the array arr. remember to free use valgrid to check 
+		// 	strcpy(departments[i]-> name, arr); //copies the department name from arr array
+		// }
+		// else{
+		// 	printf("Department missing\n"); // remove before turn in. 
+		// 	exit(-1); // exit only if department mssing
+		// }
+		// //printf("\nTest case 3\n"); // working 
+
+
+
+		// // read items needed for the departments and their prices 
+		// while (fgets(arr, STRING_LENGTH, file) != NULL) {
+    	// 	arr[strcspn(arr, "\n")] = '\0'; // Remove the newline character (same as above)
+    	// 	queueType item = (queueType)malloc(sizeof(Item)); // Allocate memory for the item
+    	// 	item->name = (char *)malloc(strlen(arr) + 1);
+    	// 	strcpy(item->name, arr); // Copy item name (SRC, DEST)
+
+    	// 	if (fgets(arr, STRING_LENGTH, file) != NULL) { // checks if there is another line to read from the file to retrieve the price of the item using fgets. it converts the string to a floating-point number using atof and stores it in the item->price
+        // 		item->price = atof(arr); // Convert string to decimal number used atof 
+		// 		//printf( "\nWorks for:  %s\n", fileNames[i]); // it is workig for all of themn so idk why in the else it says physics and astronomy not 
+    	// 	} 
+		// 	else {
+        // 		// Handle the case where the price is missing
+        // 		printf( "Error: Missing price for an item in %s\n", fileNames[i]); // still showing missing price for physics and astronomy HOW TO FIX  ////////////// it shows after showing all of them so is that okay
+        // 		free(item->name); // Free memory allocated for the item name
+        // 		free(item); // Free memory allocated for the item
+        // 		continue; // Skip adding this item to the list // continues to next line even oif there is an error or atr least that is what I am trying to do 
 
 
 
 
 
-		// read items needed for the departments and their prices 
-		while (fgets(arr, STRING_LENGTH, file) != NULL) {
-    		arr[strcspn(arr, "\n")] = '\0'; // Remove the newline character (same as above)
-    		queueType item = (queueType)malloc(sizeof(Item)); // Allocate memory for the item
-    		item->name = (char *)malloc(strlen(arr) + 1);
-    		strcpy(item->name, arr); // Copy item name (SRC, DEST)
+		if (fscanf(file, "%s", arr) == 1) {
+   		// strcspn calculates the length of the number of characters before the 1st
+   		// occurrence of character present in both the string.
+   		// arr[strcspn(arr, "\n")] = '\0'; // removing newline characters from file
+   			departments[i]->name = (char *)malloc(strlen(arr) + 1);  // mallocing the array arr. remember to free use valgrid to check
+   			strcpy(departments[i]->name, arr);  // copies the department name from arr array
+} 
+		else {
+   			printf("Department missing\n");  // remove before turn in.
+  			 exit(-1);                        // exit only if department mssing
+}
+// printf("\nTest case 3\n"); // working
 
-    		if (fgets(arr, STRING_LENGTH, file) != NULL) { // checks if there is another line to read from the file to retrieve the price of the item using fgets. it converts the string to a floating-point number using atof and stores it in the item->price
-        		item->price = atof(arr); // Convert string to decimal number used atof 
-				//printf( "\nWorks for:  %s\n", fileNames[i]); // it is workig for all of themn so idk why in the else it says physics and astronomy not 
-    		} 
-			else {
-        		// Handle the case where the price is missing
-        		printf( "Error: Missing price for an item in %s\n", fileNames[i]); // still showing missing price for physics and astronomy HOW TO FIX  ////////////// it shows after showing all of them so is that okay
-        		free(item->name); // Free memory allocated for the item name
-        		free(item); // Free memory allocated for the item
-        		continue; // Skip adding this item to the list // continues to next line even oif there is an error or atr least that is what I am trying to do 
+// read items needed for the departments and their prices
+		while (fscanf(file, "%s", arr) == 1) {
+   			// arr[strcspn(arr, "\n")] = '\0'; // Remove the newline character (same as
+   			// above)
+   			queueType item = (queueType)malloc(sizeof(Item));  // Allocate memory for the item
+   			item->name = (char *)malloc(strlen(arr) + 1);
+   			strcpy(item->name, arr);  // Copy item name (SRC, DEST)
+
+   			if (fscanf(file, "%lf", &item->price) == 1) {  
+      		//JESS: No code needed here ///?????
+   } 			
+   			else {
+      			// Handle the case where the price is missing
+      			printf("Error: Missing price for an item in %s\n", fileNames[i]);  // still showing missing price for physics and
+                             // astronomy HOW TO FIX  ////////////// nvmd it shows
+                             // after showing all of them so is that okay
+      			free(item->name);      // Free memory allocated for the item name
+      			free(item);            // Free memory allocated for the item
+      			continue;  // Skip adding this item to the list // continues to next line
+                 // even oif there is an error or atr least that is what I am trying to do
+
+			}
+		
+	
 
 
-
-
-
-
-			
-    }
+	
     
     enqueue(departments[i]->itemsDesired, item); // Add item to the end of the queue
 	//printf("\nTEST 5\n"); // works 
@@ -113,7 +149,7 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 		
 		
 	fclose(file);
-	}
+}
 
 
     /* Simulate the algorithm for picking the items to purchase */
@@ -137,7 +173,7 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 		//printf("\nTEST 9\n"); // works 
 
 		// while the price of the next item is wanted by the department is greater than what we have remaining in the budget, move the item to the item removed queue
-		while(!isEmpty(currentDepartment->itemsDesired)){
+		if(!isEmpty(currentDepartment->itemsDesired)){ /////// Here is the problem.
 			queueType nextItem = getNext(currentDepartment->itemsDesired); // gets next item the department wants in its queue 
 			//printf("\nTEST 10\n"); // works 
 			if(nextItem->price > remainingBudget){ // if the next item in the departments list is more than what is left in the budget
@@ -149,7 +185,7 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 			else{ // if price is less than the remaining budget 
 				//else the next item, we will buy for the department 
 				currentDepartment->totalSpent += nextItem->price; // total spent for the department increased 
-				remainingBudget -= nextItem->price; // remainign budgetdecreased 
+				remainingBudget -= nextItem->price; // remainign budget decreased 
 				// update priority of the department:
 				topDepartment.priority = currentDepartment->totalSpent; // priority q updated 
 				//add to their list of items recived queue using enqueue and dequeu
@@ -165,7 +201,7 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
             		printf("Department of %-30s- %-30s- %20s\n", currentDepartment->name, nextItem->name, priceString);
 				}
 			}
-		}
+		
 
 		if(isEmpty(currentDepartment->itemsDesired)){ // checks if a department's itemsDesired queue empty meaning they do not need any more items 
 			// if the departments dont need anything anymore and thus their itemsdesired queue is empty, give $1000 scholarship or whatver the remaining budget is if smaller:
@@ -185,17 +221,20 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 			remainingBudget -= scholarshipOrRemBudget; ////// check this to see if it works with the condtionals // scholarship amount subtracted from the budget 
 			}
 				
-			}
+			
 
 	
        
 	/* Print the information for each department (including which items were received and which were not) */ // 10/17
-	//int i;
+	//int i; /////////////////////////////////////////////////////////////////////////////////////////////
+		}
+	}
 	char priceString[20];
 	printf("TESTING with budget = $%.2lf\n\n", budget);
 	printf("ITEMS PURCHASED\n");
 	printf("----------------------------\n");
 	// 10/20
+		
 	
 	
 	for(i = 0; i < testDataSize; i++){
@@ -237,11 +276,17 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
         free(departments[i]);
 
 
-
+		
 		
 	}
+	
+	
 	freePQ(pq);
 }
+
+
+	
+
 
 
 
