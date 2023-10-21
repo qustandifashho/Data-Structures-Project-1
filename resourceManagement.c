@@ -236,11 +236,10 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
 	// 10/20
 		
 	
-	
 	for(i = 0; i < testDataSize; i++){
 		 // Items purchased 
 
-        printf("Department of %-30s- %-30s- %20s\n", departments[i]->name, " ", " ");
+        printf("Department of %-30s %30s %20s\n", departments[i]->name, " ", " ");
 		printf("Total Spent = %.2lf\n", departments[i] -> totalSpent);
 		printf("Percent of budget = %.2lf\n", (departments[i]-> totalSpent/budget)*100);
 		printf("----------------------------\n");
@@ -263,6 +262,7 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
     		sprintf(priceString, "$%.2lf", item->price);
     		printf("%-30s- %20s\n", item->name, priceString); // This line will only print the item name and price.
 
+			
     		free(item->name);
     		free(item);
 		}
@@ -277,19 +277,18 @@ void ResourceManagement( char* fileNames[], int testDataSize, double budget ){
         		remainingBudget -= scholarship; // Deduct scholarship from the budget
     //}
 }
-		printf("\n");
-		 printf("ITEMS NOT RECEIVED\n");
-        // Print items not received
-        while (!isEmpty(departments[i]->itemsRemoved)) {
-            queueType item = dequeue(departments[i]->itemsRemoved);
-			//char priceString[20];
-			sprintf(priceString, "$%.2lf", item->price);
-			printf("%-30s- %20s\n", item->name, priceString);;
 
-            //printf("%-30s- %20s\n", item->name, priceString);
-            free(item->name);
-            free(item);
-        }
+		printf("\n");
+		while (!isEmpty(departments[i]->itemsDesired)) {
+    queueType item = dequeue(departments[i]->itemsDesired);
+    char priceString[20];
+    sprintf(priceString, "$%.2lf", item->price);
+    printf("%-30s- %20s\n", item->name, priceString);
+
+    free(item->name);
+    free(item);
+}
+
 
 
 
